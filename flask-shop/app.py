@@ -16,15 +16,17 @@ def home():
 def product_list(category_id):
     category = get_category(category_id, get_all_categories())
     products = get_all_products()
-    app.logger.debug(products)
-    return render_template('products/list.html', category=category, products=products)
+    productsGrid = render_template('products/productsgrid.html', products=products, category=category)
+    return render_template('products/list.html', category=category, products=products, productsGrid=productsGrid)
 
 
 @app.route('/products/<category_id>/<product_id>')
 def product_details(category_id, product_id):
     category = get_category(category_id, get_all_categories())
     product = get_product(product_id)
-    return render_template('products/details.html', category=category, product=product, products=get_all_products(8))
+    products = get_all_products(8)
+    productsGrid = render_template('products/productsgrid.html', products=products, category=category)
+    return render_template('products/details.html', category=category, product=product, productsGrid=productsGrid)
 
 
 @app.route('/products/<product_id>/api')

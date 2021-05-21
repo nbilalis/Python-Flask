@@ -54,37 +54,7 @@
           </div>
           <div class="aa-product-catg-body">
             <ul class="aa-product-catg">
-            {% for product in products %}
-              <!-- start single product item -->
-              <li>
-                <figure>
-                  <a class="aa-product-img" href="{{ url_for('product_details', category_id=category.id, product_id=product.id) }}">
-                    <img src="https://loremflickr.com/250/300/fashion,{{ category.id }},{{ product.title.split()[1] | lower }}?random={{ range(1, 51) | random }}" alt="polo shirt img"></a>
-                  <a class="aa-add-card-btn"href="#"><span class="fa fa-shopping-cart"></span>Add To Cart</a>
-                  <figcaption>
-                    <h4 class="aa-product-title"><a href="#">{{ product.title }}</a></h4>
-                    <span class="aa-product-price">${{ (product.price * (1 - product.discount_ratio)) | round(2) }}</span>
-                    {% if product.is_sale %}
-                      <span class="aa-product-price"><del>${{ product.price }}</del></span>
-                    {% endif %}
-                    <p class="aa-product-descrip">{{ product.description }}</p>
-                  </figcaption>
-                </figure>
-                <div class="aa-product-hvr-content">
-                  <a href="#" data-toggle="tooltip" data-placement="top" title="Add to Wishlist"><span class="fa fa-heart-o"></span></a>
-                  <a href="#" data-toggle="tooltip" data-placement="top" title="Compare"><span class="fa fa-exchange"></span></a>
-                  <a href="#" data-toggle2="tooltip" data-placement="top" title="Quick View" data-toggle="modal" data-target="#quick-view-modal"><span class="fa fa-search"></span></a>
-                </div>
-                <!-- product badge -->
-                {% if product.is_sale %}
-                  <span class="aa-badge aa-sale" href="#">SALE!</span>
-                {% elif product.is_sold_out %}
-                  <span class="aa-badge aa-sold-out" href="#">Sold Out!</span>
-                {% elif product.is_hot %}
-                  <span class="aa-badge aa-hot" href="#">HOT!</span>
-                {% endif %}
-              </li>
-            {% endfor %}
+             {{ productsGrid|safe }}
             </ul>
             <!-- quick view modal -->
             <div class="modal fade" id="quick-view-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
